@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration name="defaultConfiguration" status="warn" strict="true" monitorInterval="5">
+
+    <appenders>
+        <appender name="Console" type="Console" target="SYSTEM_OUT">
+            <layout type="PatternLayout" pattern="%t %-5p %c{2} >>- %m%n" />
+        </appender>
+        <File name="File" fileName="beanconverter.log" append="true">
+            <PatternLayout pattern="%t %-5p %c{2} >>- %m%n"/>
+        </File>
+        <appender name="AsynchFile" type="asynch" blocking="true" bufferSize="128">
+            <appender-ref ref="File" />
+        </appender>
+    </appenders>
+    <loggers>
+        <root level="debug">
+            <appender-ref ref="Console" />
+            <appender-ref ref="File" />
+        </root>
+        <logger name="org.springframework.beans">
+            <appender-ref ref="Console" />
+            <appender-ref ref="File" />
+        </logger>
+    </loggers>
+</configuration>
