@@ -1,12 +1,15 @@
 package com.victormiranda.beanconverter;
 
 import com.victormiranda.beanconverter.exception.ConversionError;
-import com.victormiranda.beanconverter.model.AddresModel;
 import com.victormiranda.beanconverter.model.AddressDTO;
+import com.victormiranda.beanconverter.model.AddressModel;
 import com.victormiranda.beanconverter.model.Match;
+import com.victormiranda.beanconverter.model.MatchSearch;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.lang.reflect.Field;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -14,12 +17,28 @@ import java.util.Set;
  */
 public class MatchDetectorTest {
 
+    @Test(expected = IllegalAccessException.class)
+    public void testInaccessibleConstructor() throws Exception {
+        MatchDetector.class.newInstance();
+    }
+
     @Test
     public void testConvertWithBasicMapping() throws ConversionError {
-        final Set<Match> matches = MatchDetector.getMatches(AddresModel.class, AddressDTO.class);
+        final Set<Match> matches = MatchDetector.getMatches(AddressModel.class, AddressDTO.class);
 
         matches.forEach(m -> System.out.println(m));
 
-        Assert.assertEquals(matches.size(), 3);
+        Assert.assertEquals(matches.size(), 5);
+    }
+
+    @Test
+    public void testCache() throws NoSuchFieldException, IllegalAccessException {
+        final Set<Match> matches = MatchDetector.getMatches(AddressModel.class, AddressDTO.class);
+
+        Field cacheField = MatchDetector.class.getDeclaredField("matchSearchCache");
+        cacheField.setAccessible(true);
+        Map<MatchSearch, Set<Match>> cache = (Map<MatchSearch, Set<Match>>) cacheField.get(MatchDetector.class);
+
+        Assert.assertSame(cache.size(), 1);
     }
 }

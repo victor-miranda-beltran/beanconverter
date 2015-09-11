@@ -6,16 +6,15 @@ import com.victormiranda.beanconverter.annotation.Mapping;
 /**
  * Created by victor on 10/09/15.
  */
-public class AddressDTO {
-
+public class AddressModel {
     private Integer id;
 
     private String name;
 
-    private CountryDTO country;
+    @Mapping(source=AddressDTO.class, field="property")
+    private String propertyDifferentName;
 
-    @Mapping(source=AddressModel.class, field="propertyDifferentName")
-    private String property;
+    private CountryModel country;
 
     public Integer getId() {
         return id;
@@ -33,29 +32,29 @@ public class AddressDTO {
         this.name = name;
     }
 
-    public String getProperty() {
-        return property;
+    public String getPropertyDifferentName() {
+        return propertyDifferentName;
     }
 
-    public void setProperty(String property) {
-        this.property = property;
+    public void setPropertyDifferentName(String propertyDifferentName) {
+        this.propertyDifferentName = propertyDifferentName;
     }
 
-    public CountryDTO getCountry() {
+    public CountryModel getCountry() {
         return country;
     }
 
-    public void setCountry(CountryDTO country) {
+    public void setCountry(CountryModel country) {
         this.country = country;
     }
 
     @Override
     public String toString() {
-        return "AddressDTO{" +
+        return "AddressModel{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", propertyDifferentName='" + propertyDifferentName + '\'' +
                 ", country=" + country +
-                ", property='" + property + '\'' +
                 '}';
     }
 }

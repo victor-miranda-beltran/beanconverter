@@ -1,14 +1,12 @@
 package com.victormiranda.beanconverter.reflection;
 
+import com.victormiranda.beanconverter.annotation.Convertible;
 import com.victormiranda.beanconverter.exception.ConversionError;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.naming.OperationNotSupportedException;
 import java.lang.reflect.Field;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 import java.util.Optional;
 
 /**
@@ -52,7 +50,6 @@ public class ReflectionUtil {
                 sourceField.setAccessible(false);
             }
         }
-
     }
 
     public static void setValue(final Object object, final Field field, final Object value) throws ConversionError {
@@ -74,12 +71,30 @@ public class ReflectionUtil {
         }
     }
 
+    public static Field getPairingField(Class source, Field destinationField) {
+        Field pairingField = null;
+
+        Field candidate =  getField(source, destinationField.getName());
+
+        if (candidate != null && isAssignable(destinationField, candidate)) {
+            pairingField = candidate;
+        }
+
+        return pairingField;
+    }
+
     private static boolean isAssignable(Field destinationField, Field sourceField) {
         final Class destinationType = destinationField.getType();
         final Class sourceType = sourceField.getType();
 
         if (destinationType.equals(sourceType) || destinationType.isAssignableFrom(sourceType)) {
             return true;
+        }
+
+        final Convertible convertible = destinationField.getType().getDeclaredAnnotation(Convertible.class);
+
+        if (convertible != null) {
+            return convertible.to().isAssignableFrom(sourceType);
         }
 
         if (destinationType.isPrimitive()) {
@@ -89,56 +104,26 @@ public class ReflectionUtil {
             return primitiveType.allow(sourceType);
         }
 
+        if (sourceType.isPrimitive()) {
+            PrimitiveType primitiveType =
+                    PrimitiveType.getByTypeName(sourceType.getName());
+            return primitiveType.wrapperClass.isAssignableFrom(destinationType);
+        }
+
         LOGGER.debug("Rejecting from " + destinationType + " to " + sourceType);
 
         return false;
     }
 
-    public static Field getPairingField(Class source, String destinationField) {
-        Field pairingField = null;
+    public static Field getField(Class source, String fieldName) {
+        Field field = null;
 
         try {
-            return source.getDeclaredField(destinationField);
+            field = source.getDeclaredField(fieldName);
         } catch (NoSuchFieldException e) {
             LOGGER.debug(e);
         }
 
-        return pairingField;
-    }
-}
-
-enum PrimitiveType {
-    BOOLEAN("bool", Boolean.class, Collections.EMPTY_LIST),
-    BYTE("byte",Byte.class, Collections.EMPTY_LIST),
-    SHORT("short",Short.class, Arrays.asList(BYTE)),
-    INT("int",Integer.class, Arrays.asList(SHORT, BYTE)),
-    LONG("long",Long.class, Arrays.asList(INT, SHORT, BYTE)),
-    FLOAT("float",Float.class, Arrays.asList(LONG, INT, SHORT, BYTE)),
-    DOUBLE("double",Double.class, Arrays.asList(FLOAT, LONG, INT, SHORT, BYTE));
-
-    final Class wrapperClass;
-    final String typeName;
-    final transient List<PrimitiveType> allowedConversions;
-
-    PrimitiveType(String typeName, Class wrapperClass, List<PrimitiveType> allowedConversions) {
-        this.typeName = typeName;
-        this.wrapperClass = wrapperClass;
-        this.allowedConversions = allowedConversions;
-    }
-
-    public static PrimitiveType getByTypeName(final String typeName) {
-        for (PrimitiveType primitiveType : PrimitiveType.values()) {
-            if (primitiveType.typeName.equals(typeName)) {
-                return primitiveType;
-            }
-        }
-
-        throw new IllegalArgumentException();
-    }
-
-    public boolean allow(Class destinationType) {
-        PrimitiveType destinationPrimitiveType = getByTypeName(destinationType.getName());
-
-        return this.allowedConversions.contains(destinationPrimitiveType);
+        return field;
     }
 }

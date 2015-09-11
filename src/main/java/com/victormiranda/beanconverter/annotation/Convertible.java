@@ -1,4 +1,4 @@
-package com.victormiranda.beanconverter;
+package com.victormiranda.beanconverter.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -6,13 +6,11 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Created by victor on 11/09/15.
+ * Created by victor on 11/09/2015.
  */
-@Target(ElementType.FIELD)
+@Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Mapping {
+public @interface Convertible {
 
-    Class source();
-
-    String field();
+    Class to();
 }

@@ -1,8 +1,9 @@
 package com.victormiranda.beanconverter.model;
 
-import com.victormiranda.beanconverter.Mapping;
+import com.victormiranda.beanconverter.annotation.Mapping;
 
 import java.lang.reflect.Field;
+import java.util.Objects;
 
 /**
  * Created by victor on 10/09/15.
@@ -36,11 +37,22 @@ public class Match {
     }
 
     @Override
-    public String toString() {
-        return "Match{" +
-                "sourceField=" + sourceField +
-                ", destinationField=" + destinationField +
-                ", mapping=" + mapping +
-                '}';
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        Match match = (Match) o;
+        return Objects.equals(sourceField, match.sourceField) &&
+                Objects.equals(destinationField, match.destinationField) &&
+                Objects.equals(mapping, match.mapping);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(sourceField, destinationField, mapping);
     }
 }

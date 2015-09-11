@@ -1,12 +1,12 @@
 package com.victormiranda.beanconverter;
 
+import com.victormiranda.beanconverter.annotation.Convertible;
 import com.victormiranda.beanconverter.exception.ConversionError;
 import com.victormiranda.beanconverter.model.Match;
 import com.victormiranda.beanconverter.reflection.ReflectionUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import javax.naming.OperationNotSupportedException;
 import java.util.Set;
 
 /**
@@ -16,19 +16,22 @@ public final class BeanConverter {
 
     private static final Logger LOGGER = LogManager.getLogger(BeanConverter.class);
 
-    private BeanConverter() throws OperationNotSupportedException {
-        throw new OperationNotSupportedException();
+    private BeanConverter() {
+        throw new UnsupportedOperationException();
     }
 
-    public static final Object convert(final Object objectSource, final Class classDestination)
+    public static final <T> T convert(final Object objectSource, final Class<T> classDestination)
             throws ConversionError {
-
-        final Object result;
+        final T result;
 
         try {
             result = classDestination.newInstance();
         } catch (InstantiationException | IllegalAccessException e) {
             throw new ConversionError(e);
+        }
+
+        if (objectSource == null) {
+            return result;
         }
 
         final Class classSource = objectSource.getClass();
@@ -40,7 +43,6 @@ public final class BeanConverter {
                 applyMatch(result, objectSource, m);
             } catch (ConversionError conversionError) {
                 LOGGER.debug(conversionError);
-
             }
         });
 
@@ -48,8 +50,18 @@ public final class BeanConverter {
     }
 
     private static void applyMatch(final Object object, final Object source, final Match match) throws ConversionError {
-        final Object sourceValue = ReflectionUtil.getValue(source, match.getSourceField());
+        final Object sourceValue;
+        final Convertible convertible;
 
-        ReflectionUtil.setValue(object, match.getDestinationField(), sourceValue);
+        if ((convertible = match.getSourceField().getType().getDeclaredAnnotation(Convertible.class)) != null) {
+            Object convertibleValue = ReflectionUtil.getValue(source, match.getSourceField());
+            sourceValue = convert(convertibleValue, convertible.to() );
+        } else {
+             sourceValue = ReflectionUtil.getValue(source, match.getSourceField());
+        }
+
+        if (sourceValue != null) {
+            ReflectionUtil.setValue(object, match.getDestinationField(), sourceValue);
+        }
     }
 }
