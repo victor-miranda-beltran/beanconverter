@@ -93,6 +93,18 @@ public class ReflectionUtil {
 
         return false;
     }
+
+    public static Field getPairingField(Class source, String destinationField) {
+        Field pairingField = null;
+
+        try {
+            return source.getDeclaredField(destinationField);
+        } catch (NoSuchFieldException e) {
+            LOGGER.debug(e);
+        }
+
+        return pairingField;
+    }
 }
 
 enum PrimitiveType {

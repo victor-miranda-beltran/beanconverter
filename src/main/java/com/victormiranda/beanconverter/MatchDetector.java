@@ -1,12 +1,14 @@
 package com.victormiranda.beanconverter;
 
 import com.victormiranda.beanconverter.model.Match;
+import com.victormiranda.beanconverter.reflection.ReflectionUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.naming.OperationNotSupportedException;
 import java.lang.reflect.Field;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 /**
@@ -26,17 +28,44 @@ public final class MatchDetector {
         final Field[] destinationFields = destination.getDeclaredFields();
 
         for (Field destinationField : destinationFields) {
-            try {
-                final Field pairingField = source.getDeclaredField(destinationField.getName());
-
-                if (pairingField != null) {
-                    matches.add(new Match(pairingField, destinationField));
-                }
-            } catch (NoSuchFieldException e) {
-                LOGGER.trace(e);
+            final Match match = getMatch(source, destinationField);
+            if (match != null) {
+                matches.add(getMatch(source, destinationField));
             }
         }
 
         return matches;
+    }
+
+    private static Match getMatch(Class source, Field destinationField) {
+        Match match = null;
+
+        Field pairingField = ReflectionUtil.getPairingField(source, destinationField.getName());
+        Mapping annotationMapping = null;
+
+        if (pairingField == null) {
+            annotationMapping = getMapping(source, destinationField);
+            pairingField = ReflectionUtil.getPairingField(source, annotationMapping.field());
+        }
+        if (pairingField != null) {
+            match = new Match(pairingField, destinationField, annotationMapping);
+        }
+
+        return match;
+    }
+
+    private static Mapping getMapping(Class source, Field destinationField) {
+        Mapping sourceMapping = null;
+
+        Mapping[] mappings = destinationField.getDeclaredAnnotationsByType(Mapping.class);
+
+        for (Mapping mapping : mappings) {
+            if (mapping.source().equals(source)) {
+                sourceMapping = mapping;
+                break;
+            }
+        }
+
+        return sourceMapping;
     }
 }

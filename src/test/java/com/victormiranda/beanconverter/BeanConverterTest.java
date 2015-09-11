@@ -1,6 +1,8 @@
 package com.victormiranda.beanconverter;
 
 import com.victormiranda.beanconverter.exception.ConversionError;
+import com.victormiranda.beanconverter.model.AddresModel;
+import com.victormiranda.beanconverter.model.AddressDTO;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -35,6 +37,8 @@ public class BeanConverterTest {
         Assert.assertEquals(sourceBean.getId(), destinationBean.getId());
         Assert.assertEquals(sourceBean.getName(), destinationBean.getName());
     }
+
+
 }
 
 class SourceBean {
