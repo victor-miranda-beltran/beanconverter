@@ -6,6 +6,7 @@ import com.victormiranda.beanconverter.model.AddressModel;
 import com.victormiranda.beanconverter.model.Match;
 import com.victormiranda.beanconverter.model.MatchSearch;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.lang.reflect.Field;
@@ -17,14 +18,16 @@ import java.util.Set;
  */
 public class MatchDetectorTest {
 
-    @Test(expected = IllegalAccessException.class)
-    public void testInaccessibleConstructor() throws Exception {
-        MatchDetector.class.newInstance();
+    private MatchDetector matchDetector;
+
+    @Before
+    public void setUp() {
+        matchDetector = new MatchDetector();
     }
 
     @Test
     public void testConvertWithBasicMapping() throws ConversionError {
-        final Set<Match> matches = MatchDetector.getMatches(AddressModel.class, AddressDTO.class);
+        final Set<Match> matches = matchDetector.getMatches(AddressModel.class, AddressDTO.class);
 
         matches.forEach(m -> System.out.println(m));
 
@@ -33,7 +36,7 @@ public class MatchDetectorTest {
 
     @Test
     public void testCache() throws NoSuchFieldException, IllegalAccessException {
-        final Set<Match> matches = MatchDetector.getMatches(AddressModel.class, AddressDTO.class);
+        matchDetector.getMatches(AddressModel.class, AddressDTO.class);
 
         Field cacheField = MatchDetector.class.getDeclaredField("matchSearchCache");
         cacheField.setAccessible(true);

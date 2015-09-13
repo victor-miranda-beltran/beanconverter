@@ -6,7 +6,7 @@ import java.lang.reflect.Field;
 import java.util.Objects;
 
 /**
- * Created by victor on 10/09/15.
+ *
  */
 public class Match {
     private final Field sourceField;

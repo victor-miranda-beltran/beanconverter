@@ -15,3 +15,38 @@ main DEBUG beanconverter.BeanConverter >>- com.victormiranda.beanconverter.excep
 main DEBUG beanconverter.MatchDetector >>- Cache hit: MatchSearch{sourceClass=class com.victormiranda.beanconverter.SourceBean, destinationClass=class com.victormiranda.beanconverter.DestinationBean}
 main ERROR reflection.ReflectionUtil >>- java.lang.IllegalAccessException: Can not set static final [Z field com.victormiranda.beanconverter.DestinationBean.$jacocoData to [Z
 main DEBUG beanconverter.BeanConverter >>- com.victormiranda.beanconverter.exception.ConversionError: java.lang.IllegalAccessException: Can not set static final [Z field com.victormiranda.beanconverter.DestinationBean.$jacocoData to [Z
+main DEBUG reflection.ReflectionUtil >>- Rejecting from class java.lang.String to class java.lang.Integer
+main DEBUG reflection.ReflectionUtil >>- Rejecting from class java.lang.String to class java.lang.Integer
+main DEBUG reflection.ReflectionUtil >>- java.lang.NoSuchFieldException: property
+main DEBUG beanconverter.MatchDetector >>- Annotation mapping detected propertyDifferentName
+main DEBUG beanconverter.MatchDetector >>- Cache hit: MatchSearch{sourceClass=class com.victormiranda.beanconverter.model.AddressModel, destinationClass=class com.victormiranda.beanconverter.model.AddressDTO}
+main DEBUG beanconverter.MatchDetector >>- Cache hit: MatchSearch{sourceClass=class com.victormiranda.beanconverter.model.AddressModel, destinationClass=class com.victormiranda.beanconverter.model.AddressDTO}
+main ERROR reflection.ReflectionUtil >>- java.lang.IllegalAccessException: Can not set static final [Z field com.victormiranda.beanconverter.model.AddressDTO.$jacocoData to [Z
+main DEBUG beanconverter.BeanConverter >>- com.victormiranda.beanconverter.exception.ConversionError: java.lang.IllegalAccessException: Can not set static final [Z field com.victormiranda.beanconverter.model.AddressDTO.$jacocoData to [Z
+main ERROR reflection.ReflectionUtil >>- java.lang.IllegalAccessException: Can not set static final [Z field com.victormiranda.beanconverter.model.CountryDTO.$jacocoData to [Z
+main DEBUG beanconverter.BeanConverter >>- com.victormiranda.beanconverter.exception.ConversionError: java.lang.IllegalAccessException: Can not set static final [Z field com.victormiranda.beanconverter.model.CountryDTO.$jacocoData to [Z
+main ERROR reflection.ReflectionUtil >>- java.lang.IllegalAccessException: Can not set static final [Z field com.victormiranda.beanconverter.DestinationBean.$jacocoData to [Z
+main DEBUG beanconverter.BeanConverter >>- com.victormiranda.beanconverter.exception.ConversionError: java.lang.IllegalAccessException: Can not set static final [Z field com.victormiranda.beanconverter.DestinationBean.$jacocoData to [Z
+main DEBUG beanconverter.MatchDetector >>- Cache hit: MatchSearch{sourceClass=class com.victormiranda.beanconverter.SourceBean, destinationClass=class com.victormiranda.beanconverter.DestinationBean}
+main ERROR reflection.ReflectionUtil >>- java.lang.IllegalAccessException: Can not set static final [Z field com.victormiranda.beanconverter.DestinationBean.$jacocoData to [Z
+main DEBUG beanconverter.BeanConverter >>- com.victormiranda.beanconverter.exception.ConversionError: java.lang.IllegalAccessException: Can not set static final [Z field com.victormiranda.beanconverter.DestinationBean.$jacocoData to [Z
+main DEBUG beanconverter.MatchDetector >>- Cache hit: MatchSearch{sourceClass=class com.victormiranda.beanconverter.SourceBean, destinationClass=class com.victormiranda.beanconverter.DestinationBean}
+main ERROR reflection.ReflectionUtil >>- java.lang.IllegalAccessException: Can not set static final [Z field com.victormiranda.beanconverter.DestinationBean.$jacocoData to [Z
+main DEBUG beanconverter.BeanConverter >>- com.victormiranda.beanconverter.exception.ConversionError: java.lang.IllegalAccessException: Can not set static final [Z field com.victormiranda.beanconverter.DestinationBean.$jacocoData to [Z
+main DEBUG reflection.ReflectionUtil >>- Rejecting from class java.lang.String to class java.lang.Integer
+main DEBUG reflection.ReflectionUtil >>- java.lang.NoSuchFieldException: property
+main DEBUG beanconverter.MatchDetector >>- Annotation mapping detected propertyDifferentName
+main DEBUG beanconverter.MatchDetector >>- Cache hit: MatchSearch{sourceClass=class com.victormiranda.beanconverter.model.AddressModel, destinationClass=class com.victormiranda.beanconverter.model.AddressDTO}
+main DEBUG beanconverter.MatchDetector >>- Cache hit: MatchSearch{sourceClass=class com.victormiranda.beanconverter.model.AddressModel, destinationClass=class com.victormiranda.beanconverter.model.AddressDTO}
+main ERROR reflection.ReflectionUtil >>- java.lang.IllegalAccessException: Can not set static final [Z field com.victormiranda.beanconverter.model.AddressDTO.$jacocoData to [Z
+main DEBUG beanconverter.BeanConverter >>- com.victormiranda.beanconverter.exception.ConversionError: java.lang.IllegalAccessException: Can not set static final [Z field com.victormiranda.beanconverter.model.AddressDTO.$jacocoData to [Z
+main ERROR reflection.ReflectionUtil >>- java.lang.IllegalAccessException: Can not set static final [Z field com.victormiranda.beanconverter.model.CountryDTO.$jacocoData to [Z
+main DEBUG beanconverter.BeanConverter >>- com.victormiranda.beanconverter.exception.ConversionError: java.lang.IllegalAccessException: Can not set static final [Z field com.victormiranda.beanconverter.model.CountryDTO.$jacocoData to [Z
+main ERROR reflection.ReflectionUtil >>- java.lang.IllegalAccessException: Can not set static final [Z field com.victormiranda.beanconverter.DestinationBean.$jacocoData to [Z
+main DEBUG beanconverter.BeanConverter >>- com.victormiranda.beanconverter.exception.ConversionError: java.lang.IllegalAccessException: Can not set static final [Z field com.victormiranda.beanconverter.DestinationBean.$jacocoData to [Z
+main DEBUG beanconverter.MatchDetector >>- Cache hit: MatchSearch{sourceClass=class com.victormiranda.beanconverter.SourceBean, destinationClass=class com.victormiranda.beanconverter.DestinationBean}
+main ERROR reflection.ReflectionUtil >>- java.lang.IllegalAccessException: Can not set static final [Z field com.victormiranda.beanconverter.DestinationBean.$jacocoData to [Z
+main DEBUG beanconverter.BeanConverter >>- com.victormiranda.beanconverter.exception.ConversionError: java.lang.IllegalAccessException: Can not set static final [Z field com.victormiranda.beanconverter.DestinationBean.$jacocoData to [Z
+main DEBUG beanconverter.MatchDetector >>- Cache hit: MatchSearch{sourceClass=class com.victormiranda.beanconverter.SourceBean, destinationClass=class com.victormiranda.beanconverter.DestinationBean}
+main ERROR reflection.ReflectionUtil >>- java.lang.IllegalAccessException: Can not set static final [Z field com.victormiranda.beanconverter.DestinationBean.$jacocoData to [Z
+main DEBUG beanconverter.BeanConverter >>- com.victormiranda.beanconverter.exception.ConversionError: java.lang.IllegalAccessException: Can not set static final [Z field com.victormiranda.beanconverter.DestinationBean.$jacocoData to [Z

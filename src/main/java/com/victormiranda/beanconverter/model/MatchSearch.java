@@ -3,7 +3,7 @@ package com.victormiranda.beanconverter.model;
 import java.util.Objects;
 
 /**
- * Created by victor on 11/09/15.
+ *
  */
 public class MatchSearch {
     private final Class sourceClass;

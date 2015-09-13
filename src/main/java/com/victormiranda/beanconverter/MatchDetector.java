@@ -7,27 +7,19 @@ import com.victormiranda.beanconverter.reflection.ReflectionUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import javax.naming.OperationNotSupportedException;
 import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-/**
- * Created by victor on 10/09/15.
- */
 public class MatchDetector {
 
     private static final Logger LOGGER = LogManager.getLogger(MatchDetector.class);
 
     private static Map<MatchSearch, Set<Match>> matchSearchCache = new HashMap<>();
 
-    private MatchDetector() throws OperationNotSupportedException {
-        throw new OperationNotSupportedException();
-    }
-
-    public static Set<Match> getMatches(final Class source, final Class destination) {
+    public Set<Match> getMatches(final Class source, final Class destination) {
         final MatchSearch currentSearch = new MatchSearch(source, destination);
 
         if (matchSearchCache.containsKey(currentSearch)) {
@@ -52,7 +44,7 @@ public class MatchDetector {
         return matches;
     }
 
-    private static Match getMatch(Class source, Field destinationField) {
+    private Match getMatch(Class source, Field destinationField) {
         Match match = null;
 
         Field pairingField = ReflectionUtil.getPairingField(source, destinationField);
@@ -71,7 +63,7 @@ public class MatchDetector {
         return match;
     }
 
-    private static Mapping getMapping(final Class source, final Field destinationField) {
+    private Mapping getMapping(final Class source, final Field destinationField) {
         Mapping sourceMapping = null;
 
         Mapping[] mappings = destinationField.getDeclaredAnnotationsByType(Mapping.class);

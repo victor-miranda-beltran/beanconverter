@@ -5,6 +5,7 @@ import com.victormiranda.beanconverter.model.AddressDTO;
 import com.victormiranda.beanconverter.model.AddressModel;
 import com.victormiranda.beanconverter.model.CountryModel;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -12,18 +13,25 @@ import org.junit.Test;
  */
 public class BeanConverterTest {
 
+    private BeanConverter beanConverter;
+
+    @Before
+    public void setUp() {
+        beanConverter = new SimpleBeanConverter(new MatchDetector());
+    }
+
     @Test
     public void testConvert() throws Exception {
         final SourceBean sourceBean = new SourceBean();
 
-        final DestinationBean destinationBean = BeanConverter.convert(sourceBean, DestinationBean.class);
+        final DestinationBean destinationBean = beanConverter.convert(sourceBean, DestinationBean.class);
 
         Assert.assertTrue(destinationBean instanceof DestinationBean);
     }
 
     @Test(expected = ConversionError.class)
     public void testConvertToClassWithoutPublicConstructor() throws ConversionError {
-        BeanConverter.convert(new SourceBean(), DestinationBeanNonPublicConstructor.class);
+        beanConverter.convert(new SourceBean(), DestinationBeanNonPublicConstructor.class);
     }
 
     @Test
@@ -33,7 +41,7 @@ public class BeanConverterTest {
         sourceBean.setId(3);
         sourceBean.setName("Paco");
 
-        final DestinationBean destinationBean = BeanConverter.convert(sourceBean, DestinationBean.class);
+        final DestinationBean destinationBean = beanConverter.convert(sourceBean, DestinationBean.class);
 
         Assert.assertEquals(sourceBean.getId(), destinationBean.getId());
         Assert.assertEquals(sourceBean.getName(), destinationBean.getName());
@@ -46,7 +54,7 @@ public class BeanConverterTest {
         Integer[] array = {4,3,2};
         sourceBean.setArrayIntegers(array);
 
-        final DestinationBean destinationBean = BeanConverter.convert(sourceBean, DestinationBean.class);
+        final DestinationBean destinationBean = beanConverter.convert(sourceBean, DestinationBean.class);
 
         Assert.assertArrayEquals(sourceBean.getArrayIntegers(), destinationBean.getArrayIntegers());
     }
@@ -66,7 +74,7 @@ public class BeanConverterTest {
 
         addressModel.setCountry(countryModel);
 
-        final AddressDTO addressDTO = BeanConverter.convert(addressModel, AddressDTO.class);
+        final AddressDTO addressDTO = beanConverter.convert(addressModel, AddressDTO.class);
 
         Assert.assertEquals(addressDTO.getProperty(), addressModel.getPropertyDifferentName());
     }

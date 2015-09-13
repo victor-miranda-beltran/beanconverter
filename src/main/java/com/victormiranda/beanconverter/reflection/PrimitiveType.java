@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Created by victor on 11/09/15.
+ *
  */
 public enum PrimitiveType {
     BOOLEAN("bool", Boolean.class, new ArrayList<PrimitiveType>()),
