@@ -1,9 +1,7 @@
 package com.victormiranda.beanconverter;
 
 import com.victormiranda.beanconverter.exception.ConversionError;
-import com.victormiranda.beanconverter.model.AddressDTO;
-import com.victormiranda.beanconverter.model.AddressModel;
-import com.victormiranda.beanconverter.model.CountryModel;
+import com.victormiranda.beanconverter.model.*;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -79,6 +77,23 @@ public class BeanConverterTest {
         Assert.assertEquals(addressDTO.getProperty(), addressModel.getPropertyDifferentName());
     }
 
+    @Test
+    public void testConvertComplexMapping() throws ConversionError {
+        final CategorySearch categorySearch = new CategorySearch();
+
+        categorySearch.setId(1);
+
+        Location location = new Location();
+        location.setId(3);
+        location.setName("Dublin");
+        location.setSearchName("dublin");
+
+        categorySearch.setLocation(location);
+
+        CategorySearchDTO categorySearchDTO = beanConverter.convert(categorySearch, CategorySearchDTO.class);
+
+        Assert.assertEquals(categorySearch.getLocation().getName(), categorySearchDTO.getLocation().getName());
+    }
 }
 
 class SourceBean {

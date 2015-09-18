@@ -7,6 +7,9 @@ import com.victormiranda.beanconverter.reflection.ReflectionUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
 public final class SimpleBeanConverter implements BeanConverter {
@@ -46,6 +49,16 @@ public final class SimpleBeanConverter implements BeanConverter {
             }
         });
 
+        return result;
+    }
+
+    @Override
+    public <T> List<T> convert(Collection<Object> objectCollection, Class<T> classDestination) throws ConversionError {
+        List<T> result = new ArrayList<>();
+
+        for(Object o : objectCollection) {
+            result.add(convert(o, classDestination));
+        }
         return result;
     }
 

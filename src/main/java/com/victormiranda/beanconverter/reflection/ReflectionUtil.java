@@ -91,10 +91,10 @@ public class ReflectionUtil {
             return true;
         }
 
-        final Convertible convertible = destinationField.getType().getDeclaredAnnotation(Convertible.class);
+        final Convertible convertible = sourceField.getType().getDeclaredAnnotation(Convertible.class);
 
         if (convertible != null) {
-            return convertible.to().isAssignableFrom(sourceType);
+            return convertible.to().isAssignableFrom(destinationType);
         }
 
         if (destinationType.isPrimitive()) {
