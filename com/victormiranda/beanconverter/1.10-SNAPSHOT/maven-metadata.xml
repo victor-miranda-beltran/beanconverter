@@ -2,35 +2,35 @@
 <metadata modelVersion="1.1.0">
   <groupId>com.victormiranda</groupId>
   <artifactId>beanconverter</artifactId>
-  <version>1.1-SNAPSHOT</version>
+  <version>1.10-SNAPSHOT</version>
   <versioning>
     <snapshot>
-      <timestamp>20150919.075442</timestamp>
-      <buildNumber>9</buildNumber>
+      <timestamp>20150919.080602</timestamp>
+      <buildNumber>1</buildNumber>
     </snapshot>
-    <lastUpdated>20150919075442</lastUpdated>
+    <lastUpdated>20150919080602</lastUpdated>
     <snapshotVersions>
       <snapshotVersion>
         <extension>jar</extension>
-        <value>1.1-20150919.075442-9</value>
-        <updated>20150919075442</updated>
+        <value>1.10-20150919.080602-1</value>
+        <updated>20150919080602</updated>
       </snapshotVersion>
       <snapshotVersion>
         <extension>pom</extension>
-        <value>1.1-20150919.075442-9</value>
-        <updated>20150919075442</updated>
+        <value>1.10-20150919.080602-1</value>
+        <updated>20150919080602</updated>
       </snapshotVersion>
       <snapshotVersion>
         <classifier>sources</classifier>
         <extension>jar</extension>
-        <value>1.1-20150919.075442-9</value>
-        <updated>20150919075442</updated>
+        <value>1.10-20150919.080602-1</value>
+        <updated>20150919080602</updated>
       </snapshotVersion>
       <snapshotVersion>
         <classifier>javadoc</classifier>
         <extension>jar</extension>
-        <value>1.1-20150919.075442-9</value>
-        <updated>20150919075442</updated>
+        <value>1.10-20150919.080602-1</value>
+        <updated>20150919080602</updated>
       </snapshotVersion>
     </snapshotVersions>
   </versioning>
