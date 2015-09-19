@@ -6,6 +6,10 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 /**
  * Created by victor on 10/09/15.
  */
@@ -75,6 +79,29 @@ public class BeanConverterTest {
         final AddressDTO addressDTO = beanConverter.convert(addressModel, AddressDTO.class);
 
         Assert.assertEquals(addressDTO.getProperty(), addressModel.getPropertyDifferentName());
+    }
+
+    @Test
+    public void testConvertCollection() throws ConversionError {
+        final List<Location> locationList = new ArrayList<>();
+
+        locationList.add(new Location(1, "dublin", "dublin"));
+        locationList.add(new Location(2, "cork", "cork"));
+        locationList.add(new Location(3, "galway", "galway"));
+
+        final List<LocationDTO> convertedLocationDTOList = beanConverter.convertCollection(locationList, LocationDTO.class);
+
+        Assert.assertEquals(locationList.size(), convertedLocationDTOList.size());
+
+        //TODO change to a  loop
+        Assert.assertEquals(locationList.get(0).getId(), convertedLocationDTOList.get(0).getId());
+        Assert.assertEquals(locationList.get(0).getName(), convertedLocationDTOList.get(0).getName());
+
+        Assert.assertEquals(locationList.get(1).getId(), convertedLocationDTOList.get(1).getId());
+        Assert.assertEquals(locationList.get(1).getName(), convertedLocationDTOList.get(1).getName());
+
+        Assert.assertEquals(locationList.get(2).getId(), convertedLocationDTOList.get(2).getId());
+        Assert.assertEquals(locationList.get(2).getName(), convertedLocationDTOList.get(2).getName());
     }
 
     @Test

@@ -19,11 +19,12 @@ public interface BeanConverter {
 
     /**
      * Convert from a collection of objects to a list of another type
-     * @param objectCollection
      * @param classDestination
      * @param <T>
+     * @param <R>
+     * @param objectCollection
      * @return
      * @throws ConversionError
      */
-    <T> List<T> convert(Collection<Object> objectCollection, Class<T> classDestination) throws ConversionError;
+    <T, R> List<T> convertCollection(Collection<R> objectCollection, Class<T> classDestination) throws ConversionError;
 }

@@ -14,6 +14,15 @@ public class Location {
 
     private String searchName;
 
+    public Location() {
+    }
+
+    public Location(Integer id, String name, String searchName) {
+        this.id = id;
+        this.name = name;
+        this.searchName = searchName;
+    }
+
     public Integer getId() {
         return id;
     }

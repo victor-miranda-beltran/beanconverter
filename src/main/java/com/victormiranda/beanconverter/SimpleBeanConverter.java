@@ -53,10 +53,10 @@ public final class SimpleBeanConverter implements BeanConverter {
     }
 
     @Override
-    public <T> List<T> convert(Collection<Object> objectCollection, Class<T> classDestination) throws ConversionError {
+    public <T, R> List<T> convertCollection(Collection<R> objectCollection, Class<T> classDestination) throws ConversionError {
         List<T> result = new ArrayList<>();
 
-        for(Object o : objectCollection) {
+        for(R o : objectCollection) {
             result.add(convert(o, classDestination));
         }
         return result;
